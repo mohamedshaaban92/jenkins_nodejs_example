@@ -14,17 +14,19 @@ pipeline {
         }
         stage('build') {
             steps {
-                sh "docker build -t elarief92/nodejs:v1.0 -f dockerfile"
+                sh "docker build -t elarief92/jenkins_nodejs:${BUILD_NUMBER} ."
             }
     }
         
-        // stage('push') {
-        //     steps {
-        //         git 'https://github.com/jglick/simple-maven-project-with-tests.git'
-        //         sh "mvn -Dmaven.test.failure.ignore=true clean package"
-        //     }
-        
-            
+        stage('push') {
+           steps {
+                withCredentials([usernamePassword(credentialsId:"docker-hub",usernameVariable:"username",passwordVariable:"pass")]){
+                sh 'docker build . -t ${username}/jenkins_sprints:${BUILD_NUMBER}'
+                sh 'docker login -u ${username} -p ${pass}'
+                sh 'docker push ${username}/jenkins_nodejs:${BUILD_NUMBER}'
+             }
+        }
+        }
         }
         post {
                 success {
