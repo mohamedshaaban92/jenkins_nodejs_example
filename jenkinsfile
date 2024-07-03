@@ -14,7 +14,7 @@ pipeline {
         }
         stage('build') {
             steps {
-                sh "docker build -t elarief92/nodejs:v1.0"
+                sh "docker build -t elarief92/nodejs:v1.0 -f dockerfile"
             }
     }
         
