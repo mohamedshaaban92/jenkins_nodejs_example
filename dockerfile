@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:slim
 COPY nodeapp /nodeapp
 WORKDIR /nodeapp
 RUN npm install
