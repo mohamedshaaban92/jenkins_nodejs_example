@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('cleanup') {
+            steps {
+                deleteDir()
+            }
+        
+        stage('pull') {
+            steps {
+                git 'https://github.com/mohamedshaaban92/jenkins_nodejs_example.git'
+            }
+        
+        // stage('build') {
+        //     steps {
+        //         sh "docker build -telarief92/nodejs:v1.0 -f Dockerfile"
+        //     }
+        
+        // stage('push') {
+        //     steps {
+        //         git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+        //         sh "mvn -Dmaven.test.failure.ignore=true clean package"
+        //     }
+        
+            post {
+                success {
+                    echo "build succeeded"
+                }
+                failure {
+                    echo "build failed"
+                }
+            }
+        }
+    }
+}
