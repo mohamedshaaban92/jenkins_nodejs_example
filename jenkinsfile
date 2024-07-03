@@ -6,12 +6,12 @@ pipeline {
             steps {
                 deleteDir()
             }
-        
+        }
         stage('pull') {
             steps {
                 git 'https://github.com/mohamedshaaban92/jenkins_nodejs_example.git'
             }
-        
+        }
         // stage('build') {
         //     steps {
         //         sh "docker build -telarief92/nodejs:v1.0 -f Dockerfile"
@@ -33,4 +33,4 @@ pipeline {
             }
         }
     }
-}
+
