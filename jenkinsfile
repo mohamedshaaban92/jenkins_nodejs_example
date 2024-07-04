@@ -14,7 +14,7 @@ pipeline {
         }
         stage('build') {
             steps {
-                sh "docker build -t elarief92/jenkins_nodejs:${BUILD_NUMBER} ."
+                sh "docker build -t elarief92/jenkins_nodejs:${BUILD_NUMBER} -f dockerfile"
             }
     }
         
